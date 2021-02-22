@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springvault.demo.credentials.CredentialService;
 import com.springvault.demo.credentials.Credentials;
+import com.springvault.demo.credentials.TestBean;
 
 @RestController
 public class DemoController {
 	
 	@Autowired
 	private CredentialService credentialService;
+
+	@Autowired
+	private TestBean testBean;
 
 	@GetMapping("/demo/credentials")
 	@ResponseStatus(code = HttpStatus.OK)
@@ -24,4 +28,11 @@ public class DemoController {
 		credentialService.secureCredentials(credentials);
 		return credentialService.accessCredentials();
 	}
+
+	@GetMapping("/demo/property")
+	@ResponseStatus(code = HttpStatus.OK)
+	public TestBean getPropertyTestBean() throws URISyntaxException {
+		return testBean;
+	}
+
 }
